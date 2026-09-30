@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="10월 9일(금) 춘천 나들이 하루 일정과 지도. 장소 이름을 누르면 네이버지도가 열려요.">
+<meta name="theme-color" content="#FDFBF5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="초코송이들">
+<meta property="og:title" content="초코송이들 춘천 나들이">
+<meta property="og:description" content="10월 9일(금) 하루 일정과 지도 · 장소를 누르면 네이버지도가 열려요">
+<meta property="og:image" content="https://shbang37.github.io/chocosongi/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://shbang37.github.io/chocosongi/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<title>초코송이들 춘천 나들이</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; -webkit-text-size-adjust: 100%; }
+img { max-width: 100%; }
+/* 한 줄 기둥의 모바일 초대장 — 인장(캐릭터) → 하루 일정 타임라인 → 나들이 길 지도. 나눔 카드와 같은 크림·밤색·명조 */
+:root {
+  --bg: #FDFBF5;
+  --paper: #FFFDF8;
+  --ink: #4A3528;
+  --ink-2: #6E5A46;
+  --line: #E2D8C8;
+  --chip: #F3EADB;
+  --frame: #5C3A21;
+  --dawn: #3D5F80;
+  --noon: #A8501C;
+  --dusk: #7A3F63;
+  --display: 'Gowun Batang', 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif;
+  --body: 'Gowun Dodum', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1E1712; --paper: #281F19; --ink: #F2E7D8; --ink-2: #C9B6A0; --line: #46382E; --chip: #372A21;
+    --frame: #C9A27A; --dawn: #95B5D5; --noon: #EBA072; --dusk: #D29CBE;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1E1712; --paper: #281F19; --ink: #F2E7D8; --ink-2: #C9B6A0; --line: #46382E; --chip: #372A21;
+  --frame: #C9A27A; --dawn: #95B5D5; --noon: #EBA072; --dusk: #D29CBE;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; }
+.wrap { max-width: 440px; margin: 0 auto; padding-inline: 16px; padding-block: 36px 44px; display: flex; flex-direction: column; gap: 40px; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--noon); outline-offset: 3px; border-radius: 6px; }
+
+.hero { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.chars { display: flex; align-items: flex-end; gap: 8px; }
+.eyebrow { margin: 6px 0 0; font-size: 13px; letter-spacing: 0.45em; padding-left: 0.45em; color: var(--ink-2); }
+h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 7.4vw, 32px); line-height: 1.3; text-wrap: balance; }
+.hint { margin: 6px 0 0; display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; background: var(--chip); color: var(--ink-2); font-size: 14px; }
+.hint svg { width: 16px; height: 16px; color: var(--noon); flex-shrink: 0; }
+
+.rule { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0 0 20px; font-family: var(--display); font-weight: 400; font-size: 18px; color: var(--ink-2); }
+.rule::before, .rule::after { content: ""; width: 48px; height: 1px; background: var(--line); }
+
+.timeline { list-style: none; margin: 0; padding: 0; position: relative; display: flex; flex-direction: column; }
+.timeline::before { content: ""; position: absolute; left: 79px; top: 18px; bottom: 18px; width: 2px; background: var(--line); }
+.row { display: grid; grid-template-columns: 58px 44px minmax(0, 1fr); align-items: start; }
+.dawn { --c: var(--dawn); }
+.noon { --c: var(--noon); }
+.dusk { --c: var(--dusk); }
+
+.time { font-family: var(--display); font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 19px; padding-top: 3px; }
+.dot { justify-self: center; position: relative; z-index: 1; box-sizing: border-box; border-radius: 50%; }
+.minor { padding-block: 6px 10px; }
+.minor .dot { width: 13px; height: 13px; margin-top: 11px; border: 3px solid var(--c); background: var(--bg); }
+.minor .what-main { font-size: 17px; }
+.minor .what { margin: 0; font-size: 13px; color: var(--ink-2); }
+
+.stop { padding-block: 10px 16px; }
+.stop .time { font-size: 23px; padding-top: 2px; color: var(--c); }
+.stop .dot { width: 16px; height: 16px; margin-top: 13px; background: var(--c); }
+.head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 10px; }
+.place { display: inline-flex; align-items: center; gap: 6px; font-family: var(--display); font-size: 25px; line-height: 1.3; text-decoration: underline; text-decoration-color: var(--c); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+.place svg { width: 17px; height: 17px; color: var(--c); flex-shrink: 0; }
+.dur { font-size: 13px; padding: 3px 10px; border-radius: 999px; background: var(--chip); color: var(--ink-2); white-space: nowrap; }
+.what { margin: 4px 0 0; font-size: 14px; color: var(--ink-2); }
+.more { margin: 6px 0 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
+.more a { color: var(--ink-2); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+
+.move { padding-block: 0 4px; }
+.chip { display: inline-flex; align-items: center; gap: 6px; width: max-content; padding: 3px 11px 3px 9px; border-radius: 999px; background: var(--chip); color: var(--ink-2); font-size: 13px; }
+.chip svg { width: 20px; height: 13px; color: var(--ink-2); }
+
+.map { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); }
+.map img { display: block; width: 100%; height: auto; max-width: 100%; }
+.spot { position: absolute; border-radius: 14px; }
+.spot:hover { background: color-mix(in srgb, var(--frame) 8%, transparent); }
+.spot:focus-visible { outline: 3px solid var(--noon); outline-offset: 0; }
+.note { margin: 12px 0 0; text-align: center; font-size: 13px; color: var(--ink-2); }
+
+footer { padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 13px; letter-spacing: 0.12em; color: var(--ink-2); }
+</style>
+
+</head>
+<body>
+<main class="wrap">
+
+  <header class="hero">
+    <div class="chars" aria-hidden="true">
+      <svg width="76" height="76" viewBox="0 0 1000 1000">
+        <circle cx="500" cy="500" r="498" fill="#F0E4CC"></circle>
+        <g transform="translate(500 540) scale(0.80) translate(-500 -520)">
+          <path d="M312 455 C300 600 292 706 294 762 C297 838 380 880 500 880 C620 880 703 838 706 762 C708 706 700 600 688 455 Z" fill="#E5B97F"></path>
+          <path d="M312 455 C306 520 302 545 302 552 C380 570 620 570 698 552 C698 545 694 520 688 455 Z" fill="#D6A56B"></path>
+          <path d="M150 455 C150 280 305 160 500 160 C695 160 850 280 850 455 C850 472 838 484 818 488 C712 506 288 506 182 488 C162 484 150 472 150 455 Z" fill="#5A3E29"></path>
+          <ellipse cx="356" cy="274" rx="104" ry="42" transform="rotate(-16 356 274)" fill="#6B4C34"></ellipse>
+          <path d="M386 630 Q428 676 470 630" stroke="#3A2416" stroke-width="32" stroke-linecap="round" fill="none"></path>
+          <path d="M530 630 Q572 676 614 630" stroke="#3A2416" stroke-width="32" stroke-linecap="round" fill="none"></path>
+          <ellipse cx="346" cy="678" rx="33" ry="18" fill="#DE8676"></ellipse>
+          <ellipse cx="654" cy="678" rx="33" ry="18" fill="#DE8676"></ellipse>
+          <path d="M466 702 Q500 734 534 702" stroke="#3A2416" stroke-width="26" stroke-linecap="round" fill="none"></path>
+        </g>
+      </svg>
+      <svg width="50" height="50" viewBox="0 0 1000 1000">
+        <circle cx="500" cy="500" r="498" fill="#F0E4CC"></circle>
+        <g transform="translate(500 540) scale(0.80) translate(-500 -520)">
+          <path d="M312 455 C300 600 292 706 294 762 C297 838 380 880 500 880 C620 880 703 838 706 762 C708 706 700 600 688 455 Z" fill="#E5B97F"></path>
+          <path d="M312 455 C306 520 302 545 302 552 C380 570 620 570 698 552 C698 545 694 520 688 455 Z" fill="#D6A56B"></path>
+          <path d="M150 455 C150 280 305 160 500 160 C695 160 850 280 850 455 C850 472 838 484 818 488 C712 506 288 506 182 488 C162 484 150 472 150 455 Z" fill="#7A5638"></path>
+          <circle cx="428" cy="642" r="32" fill="#3A2416"></circle>
+          <circle cx="572" cy="642" r="32" fill="#3A2416"></circle>
+          <ellipse cx="346" cy="680" rx="34" ry="20" fill="#DE8676"></ellipse>
+          <ellipse cx="654" cy="680" rx="34" ry="20" fill="#DE8676"></ellipse>
+          <path d="M468 704 Q500 732 532 704" stroke="#3A2416" stroke-width="28" stroke-linecap="round" fill="none"></path>
+        </g>
+      </svg>
+    </div>
+    <p class="eyebrow">초코송이들</p>
+    <h1>10월 9일 금요일 · 춘천</h1>
+    <p class="hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+      장소 이름을 누르면 네이버지도가 열려요
+    </p>
+  </header>
+
+  <section aria-labelledby="h-day">
+    <h2 class="rule" id="h-day">하루 일정</h2>
+    <ol class="timeline">
+
+      <li class="row minor dawn">
+        <span class="time">07:00</span>
+        <span class="dot"></span>
+        <div>
+          <div class="what-main">집합 · 출발</div>
+          <p class="what">06:50까지 와주세요</p>
+        </div>
+      </li>
+
+      <li class="row stop dawn">
+        <span class="time">09:00</span>
+        <span class="dot"></span>
+        <div>
+          <div class="head">
+            <a class="place" href="https://map.naver.com/p/search/38%EB%A7%88%EC%9D%BC%20%EC%B6%98%EC%B2%9C" target="_blank" rel="noopener">38마일<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></a>
+            <span class="dur">1시간 30분</span>
+          </div>
+          <p class="what">아침 · 베이커리 카페</p>
+          <p class="more"><a href="https://triple.guide/restaurants/4dd733ae-15c2-431e-a2e3-db36b596aaa9" target="_blank" rel="noopener">소개 보기</a></p>
+        </div>
+      </li>
+
+      <li class="row move" aria-label="차로 약 10분">
+        <span></span><span></span>
+        <span class="chip"><svg viewBox="-25 -23 50 37" aria-hidden="true"><rect x="-24" y="-12" width="48" height="18" rx="8" fill="currentColor"></rect><path d="M-14 -12 L-9 -22 H9 L14 -12 Z" fill="currentColor"></path><circle cx="-13" cy="7" r="6" fill="currentColor"></circle><circle cx="13" cy="7" r="6" fill="currentColor"></circle></svg>차로 약 10분</span>
+      </li>
+
+      <li class="row stop dawn">
+        <span class="time">10:30</span>
+        <span class="dot"></span>
+        <div>
+          <div class="head">
+            <a class="place" href="https://map.naver.com/p/search/%EA%B9%80%EC%9C%A0%EC%A0%95%EC%97%AD" target="_blank" rel="noopener">김유정역<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></a>
+            <span class="dur">1시간 30분</span>
+          </div>
+          <p class="what">옛 김유정역 · 김유정문학촌</p>
+          <p class="more">
+            <a href="https://www.chuncheon.go.kr/tour/destination/all-tour/detail/?tourId=220" target="_blank" rel="noopener">옛 김유정역 소개</a>
+            <a href="https://www.chuncheon.go.kr/tour/destination/all-tour/detail/?tourId=189" target="_blank" rel="noopener">김유정문학촌 소개</a>
+          </p>
+        </div>
+      </li>
+
+      <li class="row move" aria-label="차로 약 15분">
+        <span></span><span></span>
+        <span class="chip"><svg viewBox="-25 -23 50 37" aria-hidden="true"><rect x="-24" y="-12" width="48" height="18" rx="8" fill="currentColor"></rect><path d="M-14 -12 L-9 -22 H9 L14 -12 Z" fill="currentColor"></path><circle cx="-13" cy="7" r="6" fill="currentColor"></circle><circle cx="13" cy="7" r="6" fill="currentColor"></circle></svg>차로 약 15분</span>
+      </li>
+
+      <li class="row stop noon">
+        <span class="time">12:00</span>
+        <span class="dot"></span>
+        <div>
+          <div class="head">
+            <a class="place" href="https://map.naver.com/p/search/%EC%B6%98%EC%B2%9C%EB%AA%85%EB%8F%99%EB%8B%AD%EA%B0%88%EB%B9%84%EA%B3%A8%EB%AA%A9" target="_blank" rel="noopener">춘천 닭갈비<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></a>
+            <span class="dur">2시간</span>
+          </div>
+          <p class="what">점심 · 조별로 여러 가게에 나눠 가요</p>
+          <p class="more">
+            <a href="https://www.chuncheon.go.kr/tour/destination/all-tour/detail/?tourId=231" target="_blank" rel="noopener">명동 닭갈비골목 소개</a>
+            <a href="https://www.diningcode.com/list.dc?query=%EC%B6%98%EC%B2%9C%EB%AA%85%EB%8F%99+%EB%8B%AD%EA%B0%88%EB%B9%84" target="_blank" rel="noopener">가게 목록</a>
+          </p>
+        </div>
+      </li>
+
+      <li class="row move" aria-label="차로 약 15분">
+        <span></span><span></span>
+        <span class="chip"><svg viewBox="-25 -23 50 37" aria-hidden="true"><rect x="-24" y="-12" width="48" height="18" rx="8" fill="currentColor"></rect><path d="M-14 -12 L-9 -22 H9 L14 -12 Z" fill="currentColor"></path><circle cx="-13" cy="7" r="6" fill="currentColor"></circle><circle cx="13" cy="7" r="6" fill="currentColor"></circle></svg>차로 약 15분</span>
+      </li>
+
+      <li class="row stop noon">
+        <span class="time">14:00</span>
+        <span class="dot"></span>
+        <div>
+          <div class="head">
+            <a class="place" href="https://map.naver.com/p/search/%EC%B6%98%EC%B2%9C%20%EC%82%B0%ED%86%A0%EB%A6%AC%EB%8B%88" target="_blank" rel="noopener">산토리니<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></a>
+            <span class="dur">2시간</span>
+          </div>
+          <p class="what">구봉산 카페 · 춘천 전망</p>
+          <p class="more"><a href="https://www.diningcode.com/profile.php?rid=37cPY7sGVrzN" target="_blank" rel="noopener">소개 보기</a></p>
+        </div>
+      </li>
+
+      <li class="row minor dusk">
+        <span class="time">16:00</span>
+        <span class="dot"></span>
+        <div><div class="what-main">귀가 출발</div></div>
+      </li>
+
+      <li class="row minor dusk">
+        <span class="time">18:00</span>
+        <span class="dot"></span>
+        <div>
+          <div class="what-main">도착</div>
+          <p class="what">막히면 18:30</p>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-map">
+    <h2 class="rule" id="h-map">춘천 나들이 길</h2>
+    <div class="map">
+      <img src="map.png" width="874" height="850" alt="38마일에서 김유정역, 춘천 닭갈비를 지나 구봉산 산토리니까지 이어지는 춘천 나들이 지도. 이동은 차로 약 10분, 15분, 15분.">
+      <a class="spot" style="left: 33.4%; top: 82.3%; width: 40.5%; height: 10.9%" href="https://map.naver.com/p/search/38%EB%A7%88%EC%9D%BC%20%EC%B6%98%EC%B2%9C" target="_blank" rel="noopener" aria-label="38마일 네이버지도 열기"></a>
+      <a class="spot" style="left: 30%; top: 55.3%; width: 43.3%; height: 10.9%" href="https://map.naver.com/p/search/%EA%B9%80%EC%9C%A0%EC%A0%95%EC%97%AD" target="_blank" rel="noopener" aria-label="김유정역 네이버지도 열기"></a>
+      <a class="spot" style="left: 14.2%; top: 28%; width: 33.7%; height: 10.9%" href="https://map.naver.com/p/search/%EC%B6%98%EC%B2%9C%EB%AA%85%EB%8F%99%EB%8B%AD%EA%B0%88%EB%B9%84%EA%B3%A8%EB%AA%A9" target="_blank" rel="noopener" aria-label="춘천 닭갈비 네이버지도 열기"></a>
+      <a class="spot" style="left: 68.2%; top: 11.8%; width: 28.8%; height: 22.4%" href="https://map.naver.com/p/search/%EC%B6%98%EC%B2%9C%20%EC%82%B0%ED%86%A0%EB%A6%AC%EB%8B%88" target="_blank" rel="noopener" aria-label="산토리니 네이버지도 열기"></a>
+    </div>
+    <p class="note">지도 속 장소를 눌러도 네이버지도가 열려요</p>
+  </section>
+
+  <footer>송도청 · 미들청 · 이음청 — 초코송이들</footer>
+
+</main>
+
+</body>
+</html>
