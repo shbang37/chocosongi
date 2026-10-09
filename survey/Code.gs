@@ -27,7 +27,7 @@ const REVIEW_FIELDS = [
   ['before', '오기 전 마음'],
   ['change', '달라진 마음'],
   ['feel', '느낀 마음 · 기억에 남는 순간'],
-  ['next', '다음 모임을 위해'],
+  ['next', '참여 의사 · 다음 모임을 위해'],
 ];
 const SECRET_HEADERS = ['날짜', '보낸 사람', '더 이야기 나누고 싶었던 분', '운영진에게'];
 const MAX_TEXT = 1000;
