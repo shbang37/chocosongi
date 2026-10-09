@@ -101,6 +101,12 @@ h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(
 .spot:focus-visible { outline: 3px solid var(--noon); outline-offset: 0; }
 .note { margin: 12px 0 0; text-align: center; font-size: 13px; color: var(--ink-2); }
 
+.review { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 26px 20px; border-radius: 18px; background: var(--paper); border: 1px solid var(--line); text-align: center; }
+.review p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.review-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 999px; background: var(--frame); color: var(--bg); font-family: var(--display); font-size: 18px; text-decoration: none; }
+.review-btn:hover { filter: brightness(1.08); }
+.review small { font-size: 12px; color: var(--ink-2); }
+
 footer { padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 13px; letter-spacing: 0.12em; color: var(--ink-2); }
 </style>
 
@@ -260,6 +266,13 @@ footer { padding-top: 20px; border-top: 1px solid var(--line); text-align: cente
       <a class="spot" style="left: 68.2%; top: 11.8%; width: 28.8%; height: 22.4%" href="https://map.naver.com/p/search/%EC%B6%98%EC%B2%9C%20%EC%82%B0%ED%86%A0%EB%A6%AC%EB%8B%88" target="_blank" rel="noopener" aria-label="산토리니 네이버지도 열기"></a>
     </div>
     <p class="note">지도 속 장소를 눌러도 네이버지도가 열려요</p>
+  </section>
+
+  <section class="review" aria-labelledby="h-review">
+    <h2 class="rule" id="h-review" style="margin:0">오늘 하루 어땠나요?</h2>
+    <p>함께해 주셔서 고마워요. 짧은 후기를 남겨주세요 🍄</p>
+    <a class="review-btn" href="review.html">후기 남기기</a>
+    <small>익명 · 3분이면 끝나요</small>
   </section>
 
   <footer>송도청 · 미들청 · 이음청 — 초코송이들</footer>

@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="10월 9일(금) 춘천 나들이 후기. 이름을 받지 않는 익명 설문이에요.">
+<meta name="theme-color" content="#FDFBF5">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="초코송이들">
+<meta property="og:title" content="초코송이들 나들이 후기">
+<meta property="og:description" content="오늘 하루 어땠나요? 익명 · 3분이면 끝나요">
+<meta property="og:image" content="https://shbang37.github.io/chocosongi/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://shbang37.github.io/chocosongi/review.html">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<title>초코송이들 나들이 후기</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&display=swap">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; -webkit-text-size-adjust: 100%; }
+/* 일정 페이지(index.html)와 같은 크림·밤색·명조 — 질문은 종이 카드, 답은 알약 칩 */
+:root {
+  --bg: #FDFBF5;
+  --paper: #FFFDF8;
+  --ink: #4A3528;
+  --ink-2: #6E5A46;
+  --line: #E2D8C8;
+  --chip: #F3EADB;
+  --frame: #5C3A21;
+  --on-frame: #FDFBF5;
+  --noon: #A8501C;
+  --dusk: #7A3F63;
+  --display: 'Gowun Batang', 'Nanum Myeongjo', 'AppleMyungjo', 'Batang', serif;
+  --body: 'Gowun Dodum', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1E1712; --paper: #281F19; --ink: #F2E7D8; --ink-2: #C9B6A0; --line: #46382E; --chip: #372A21;
+    --frame: #C9A27A; --on-frame: #1E1712; --noon: #EBA072; --dusk: #D29CBE;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1E1712; --paper: #281F19; --ink: #F2E7D8; --ink-2: #C9B6A0; --line: #46382E; --chip: #372A21;
+  --frame: #C9A27A; --on-frame: #1E1712; --noon: #EBA072; --dusk: #D29CBE;
+  color-scheme: dark;
+}
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; word-break: keep-all; }
+.wrap { max-width: 440px; margin: 0 auto; padding-inline: 16px; padding-block: 20px 44px; display: flex; flex-direction: column; gap: 28px; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--noon); outline-offset: 3px; border-radius: 6px; }
+[hidden] { display: none !important; }
+
+.back { align-self: flex-start; font-size: 14px; color: var(--ink-2); text-decoration: none; }
+.back:hover { text-decoration: underline; }
+
+.hero { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+.chars { display: flex; align-items: flex-end; gap: 8px; }
+.eyebrow { margin: 6px 0 0; font-size: 13px; letter-spacing: 0.45em; padding-left: 0.45em; color: var(--ink-2); }
+h1 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(26px, 7.4vw, 32px); line-height: 1.3; text-wrap: balance; }
+.lead { margin: 0; color: var(--ink-2); font-size: 15px; text-wrap: balance; }
+.hint { margin: 4px 0 0; display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; background: var(--chip); color: var(--ink-2); font-size: 14px; }
+
+form { display: flex; flex-direction: column; gap: 28px; }
+.rule { display: flex; align-items: center; justify-content: center; gap: 14px; margin: 0 0 14px; font-family: var(--display); font-weight: 400; font-size: 18px; color: var(--ink-2); }
+.rule::before, .rule::after { content: ""; width: 48px; height: 1px; background: var(--line); }
+.part { display: flex; flex-direction: column; gap: 12px; }
+
+.q { margin: 0; padding: 18px 16px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); min-width: 0; }
+.q legend, .q > label { float: left; width: 100%; padding: 0; margin: 0 0 12px; font-family: var(--display); font-size: 18px; line-height: 1.45; }
+.q legend + *, .q > label + * { clear: both; }
+.opt { font-family: var(--body); font-size: 13px; color: var(--ink-2); margin-left: 4px; }
+.q.missing { border-color: var(--noon); box-shadow: 0 0 0 1px var(--noon); }
+.q.missing legend::after { content: " · 골라주세요"; font-family: var(--body); font-size: 13px; color: var(--noon); }
+
+/* 알약 칩 — 라디오·체크박스를 감싼 label */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chips.stack { flex-direction: column; }
+.chips label { position: relative; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 16px; box-sizing: border-box; border-radius: 999px; background: var(--chip); color: var(--ink); cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; }
+.chips.stack label { justify-content: flex-start; border-radius: 14px; }
+.chips input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chips label:has(input:checked) { background: var(--frame); color: var(--on-frame); }
+.chips label:has(input:focus-visible) { outline: 2px solid var(--noon); outline-offset: 2px; }
+
+.scale { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.scale label { padding: 8px 0; font-family: var(--display); font-size: 18px; font-variant-numeric: tabular-nums; }
+.ends { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: var(--ink-2); }
+
+.grid { display: flex; flex-direction: column; gap: 14px; }
+.grid-row { display: flex; flex-direction: column; gap: 6px; }
+.grid-row > span { font-size: 15px; color: var(--ink-2); }
+
+input[type="text"], textarea, select { width: 100%; box-sizing: border-box; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--ink); font: inherit; font-size: 16px; }
+textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+input::placeholder, textarea::placeholder { color: var(--ink-2); opacity: 0.7; }
+
+.send { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 12px 28px; border: 0; border-radius: 999px; background: var(--frame); color: var(--on-frame); font-family: var(--display); font-size: 18px; text-decoration: none; cursor: pointer; }
+.btn:hover { filter: brightness(1.08); }
+.btn:disabled { opacity: 0.6; cursor: progress; }
+.btn.ghost { background: var(--chip); color: var(--ink); }
+.status { margin: 0; min-height: 1.6em; font-size: 14px; color: var(--noon); text-align: center; }
+.small { margin: 0; font-size: 13px; color: var(--ink-2); text-align: center; }
+
+.card { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 28px 20px; border: 1px solid var(--line); border-radius: 18px; background: var(--paper); text-align: center; }
+.card h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 24px; }
+.card p { margin: 0; color: var(--ink-2); font-size: 15px; text-wrap: balance; }
+.card.letter { border-color: color-mix(in srgb, var(--dusk) 45%, var(--line)); }
+.card .row { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.promise { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--ink-2); }
+
+footer { padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font-size: 13px; letter-spacing: 0.12em; color: var(--ink-2); }
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <a class="back" href="./">← 일정으로</a>
+
+  <header class="hero">
+    <div class="chars" aria-hidden="true">
+      <svg width="76" height="76" viewBox="0 0 1000 1000">
+        <circle cx="500" cy="500" r="498" fill="#F0E4CC"></circle>
+        <g transform="translate(500 540) scale(0.80) translate(-500 -520)">
+          <path d="M312 455 C300 600 292 706 294 762 C297 838 380 880 500 880 C620 880 703 838 706 762 C708 706 700 600 688 455 Z" fill="#E5B97F"></path>
+          <path d="M312 455 C306 520 302 545 302 552 C380 570 620 570 698 552 C698 545 694 520 688 455 Z" fill="#D6A56B"></path>
+          <path d="M150 455 C150 280 305 160 500 160 C695 160 850 280 850 455 C850 472 838 484 818 488 C712 506 288 506 182 488 C162 484 150 472 150 455 Z" fill="#5A3E29"></path>
+          <ellipse cx="356" cy="274" rx="104" ry="42" transform="rotate(-16 356 274)" fill="#6B4C34"></ellipse>
+          <path d="M386 630 Q428 676 470 630" stroke="#3A2416" stroke-width="32" stroke-linecap="round" fill="none"></path>
+          <path d="M530 630 Q572 676 614 630" stroke="#3A2416" stroke-width="32" stroke-linecap="round" fill="none"></path>
+          <ellipse cx="346" cy="678" rx="33" ry="18" fill="#DE8676"></ellipse>
+          <ellipse cx="654" cy="678" rx="33" ry="18" fill="#DE8676"></ellipse>
+          <path d="M466 702 Q500 734 534 702" stroke="#3A2416" stroke-width="26" stroke-linecap="round" fill="none"></path>
+        </g>
+      </svg>
+      <svg width="50" height="50" viewBox="0 0 1000 1000">
+        <circle cx="500" cy="500" r="498" fill="#F0E4CC"></circle>
+        <g transform="translate(500 540) scale(0.80) translate(-500 -520)">
+          <path d="M312 455 C300 600 292 706 294 762 C297 838 380 880 500 880 C620 880 703 838 706 762 C708 706 700 600 688 455 Z" fill="#E5B97F"></path>
+          <path d="M312 455 C306 520 302 545 302 552 C380 570 620 570 698 552 C698 545 694 520 688 455 Z" fill="#D6A56B"></path>
+          <path d="M150 455 C150 280 305 160 500 160 C695 160 850 280 850 455 C850 472 838 484 818 488 C712 506 288 506 182 488 C162 484 150 472 150 455 Z" fill="#7A5638"></path>
+          <circle cx="428" cy="642" r="32" fill="#3A2416"></circle>
+          <circle cx="572" cy="642" r="32" fill="#3A2416"></circle>
+          <ellipse cx="346" cy="680" rx="34" ry="20" fill="#DE8676"></ellipse>
+          <ellipse cx="654" cy="680" rx="34" ry="20" fill="#DE8676"></ellipse>
+          <path d="M468 704 Q500 732 532 704" stroke="#3A2416" stroke-width="28" stroke-linecap="round" fill="none"></path>
+        </g>
+      </svg>
+    </div>
+    <p class="eyebrow">초코송이들</p>
+    <h1>오늘 하루 어땠나요?</h1>
+    <p class="lead">함께해 주셔서 고마워요. 편하게 남겨주세요.</p>
+    <p class="hint">익명 · 이름을 받지 않아요 · 3분</p>
+  </header>
+
+  <!-- 1. 후기 (익명) -->
+  <form id="review" novalidate>
+    <section class="part" aria-labelledby="h1-day">
+      <h2 class="rule" id="h1-day">오늘 하루</h2>
+
+      <fieldset class="q" data-required="overall">
+        <legend>오늘 나들이는 전체적으로 어땠나요?</legend>
+        <div class="chips scale" data-scale="overall"></div>
+        <div class="ends"><span>아쉬웠어요</span><span>최고였어요</span></div>
+      </fieldset>
+
+      <div class="q">
+        <label for="oneLine">오늘 하루를 한 줄로 표현한다면?<span class="opt">선택</span></label>
+        <input type="text" id="oneLine" name="oneLine" maxlength="200" placeholder="예) 닭갈비보다 사람이 더 따뜻했던 날">
+      </div>
+
+      <fieldset class="q" data-required="place0 place1 place2 place3">
+        <legend>장소별로 어땠나요?</legend>
+        <div class="grid">
+          <div class="grid-row"><span>38마일 브런치</span><div class="chips scale" data-scale="place0"></div></div>
+          <div class="grid-row"><span>김유정역</span><div class="chips scale" data-scale="place1"></div></div>
+          <div class="grid-row"><span>춘천 닭갈비</span><div class="chips scale" data-scale="place2"></div></div>
+          <div class="grid-row"><span>산토리니</span><div class="chips scale" data-scale="place3"></div></div>
+        </div>
+        <div class="ends"><span>1 아쉬웠어요</span><span>5 최고였어요</span></div>
+      </fieldset>
+
+      <div class="q">
+        <label for="best">가장 좋았던 순간이나 장소는?<span class="opt">선택</span></label>
+        <textarea id="best" name="best" maxlength="1000"></textarea>
+      </div>
+    </section>
+
+    <section class="part" aria-labelledby="h1-meet">
+      <h2 class="rule" id="h1-meet">만남과 교제</h2>
+
+      <fieldset class="q" data-required="talk">
+        <legend>새로운 사람과 충분히 이야기 나눌 수 있었나요?</legend>
+        <div class="chips scale" data-scale="talk"></div>
+        <div class="ends"><span>거의 못 했어요</span><span>충분했어요</span></div>
+      </fieldset>
+
+      <fieldset class="q" data-required="groups">
+        <legend>조를 바꿔가며 다닌 방식은 어땠나요?</legend>
+        <div class="chips stack" data-choices="groups">좋았어요|보통이에요|한 조로 쭉 가는 게 나았어요</div>
+      </fieldset>
+
+      <fieldset class="q" data-required="noProfile">
+        <legend>프로필 없이 당일 실명으로 만나는 방식은 어땠나요?</legend>
+        <div class="chips stack" data-choices="noProfile">좋았어요|보통이에요|미리 아는 게 나았어요</div>
+      </fieldset>
+    </section>
+
+    <section class="part" aria-labelledby="h1-run">
+      <h2 class="rule" id="h1-run">운영</h2>
+
+      <fieldset class="q" data-required="pace">
+        <legend>일정 시간 배분은 어땠나요?</legend>
+        <div class="chips" data-choices="pace">빡빡했어요|적당했어요|여유로웠어요</div>
+      </fieldset>
+
+      <fieldset class="q" data-required="fee">
+        <legend>회비 7만 원은 어땠나요?</legend>
+        <div class="chips" data-choices="fee">적당했어요|비쌌어요|저렴했어요</div>
+      </fieldset>
+    </section>
+
+    <section class="part" aria-labelledby="h1-next">
+      <h2 class="rule" id="h1-next">다음을 위해</h2>
+
+      <fieldset class="q" data-required="again">
+        <legend>다음에도 참여하고 싶나요?</legend>
+        <div class="chips" data-choices="again">꼭 참여할래요|아마도요|글쎄요</div>
+      </fieldset>
+
+      <div class="q">
+        <label for="wish">아쉬웠던 점이나 바라는 점이 있다면?<span class="opt">선택</span></label>
+        <textarea id="wish" name="wish" maxlength="1000"></textarea>
+      </div>
+
+      <div class="q">
+        <label for="thanks">함께한 지체들이나 섬겨준 분들께 하고 싶은 말<span class="opt">선택</span></label>
+        <textarea id="thanks" name="thanks" maxlength="1000"></textarea>
+      </div>
+    </section>
+
+    <div class="send">
+      <button class="btn" type="submit">후기 보내기</button>
+      <p class="status" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+
+  <!-- 2. 후기 완료 + 비밀 쪽지 안내 -->
+  <section id="done" class="card" hidden tabindex="-1" aria-labelledby="h-done">
+    <h2 id="h-done">후기 고마워요 🍄</h2>
+    <p>소중한 이야기, 다음 모임을 준비하는 데 잘 쓸게요.</p>
+  </section>
+
+  <section id="invite" class="card letter" hidden aria-labelledby="h-invite">
+    <h2 id="h-invite">💌 비밀 쪽지</h2>
+    <p>오늘 시간이 짧아서 더 이야기 나누지 못해 아쉬웠던 분이 있나요?</p>
+    <ul class="promise">
+      <li>운영진만 확인하고, 상대방을 포함해 누구에게도 공개하지 않아요</li>
+      <li>다음 만남에서 자연스럽게 같은 조가 되도록 돕는 데만 써요</li>
+      <li>방금 남긴 후기와는 연결되지 않아요</li>
+    </ul>
+    <div class="row">
+      <button class="btn" type="button" id="open-letter">쪽지 남기기</button>
+      <a class="btn ghost" href="./">괜찮아요</a>
+    </div>
+  </section>
+
+  <!-- 3. 비밀 쪽지 (선택 · 이름 있음) -->
+  <form id="letter" hidden novalidate tabindex="-1">
+    <section class="part" aria-labelledby="h3-letter">
+      <h2 class="rule" id="h3-letter">💌 비밀 쪽지</h2>
+      <p class="small">운영진만 보고, 누구에게도 공개하지 않아요.</p>
+
+      <div class="q" data-required="me">
+        <label for="me">내 이름</label>
+        <select id="me" name="me"><option value="">불러오는 중…</option></select>
+      </div>
+
+      <fieldset class="q" data-required="picks">
+        <legend>더 이야기 나누고 싶었던 분 <span class="opt">여러 명 골라도 돼요</span></legend>
+        <div class="chips" id="picks"></div>
+      </fieldset>
+
+      <div class="q">
+        <label for="note">운영진에게 남기고 싶은 말<span class="opt">선택</span></label>
+        <textarea id="note" name="note" maxlength="1000"></textarea>
+      </div>
+    </section>
+
+    <div class="send">
+      <button class="btn" type="submit">쪽지 보내기</button>
+      <p class="status" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+
+  <section id="sent" class="card letter" hidden tabindex="-1" aria-labelledby="h-sent">
+    <h2 id="h-sent">소중한 마음 고마워요</h2>
+    <p>운영진만 보고 조용히 간직할게요 💌</p>
+    <a class="btn ghost" href="./">일정 페이지로</a>
+  </section>
+
+  <footer>송도청 · 미들청 · 이음청 — 초코송이들</footer>
+
+</main>
+
+<script>
+// 구글 앱 스크립트 웹 앱 URL (survey/README.md 참고)
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbwqJMjFNGsAWQtlNIaecSnM5XvWSILNaLr8NtRfsUJOBwN-tBMh84yaSWMxXUpdOqiZ/exec';
+const DRAFT_KEY = 'chocosongi-review-draft';
+
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+
+// 칩 만들기
+function chip(name, value, type = 'radio') {
+  const label = document.createElement('label');
+  const input = document.createElement('input');
+  input.type = type; input.name = name; input.value = value;
+  label.append(input, document.createTextNode(value));
+  return label;
+}
+$$('[data-scale]').forEach(box => {
+  ['1', '2', '3', '4', '5'].forEach(v => box.append(chip(box.dataset.scale, v)));
+  box.setAttribute('role', 'radiogroup');
+});
+$$('[data-choices]').forEach(box => {
+  const values = box.textContent.split('|');
+  box.textContent = '';
+  values.forEach(v => box.append(chip(box.dataset.choices, v)));
+  box.setAttribute('role', 'radiogroup');
+});
+
+// 필수 확인 — 빠진 질문을 표시하고 첫 질문으로 스크롤
+function check(form) {
+  let first = null;
+  $$('[data-required]', form).forEach(q => {
+    const ok = q.dataset.required.split(' ').every(name => {
+      const sel = $(`select[name="${name}"]`, form);
+      return sel ? !!sel.value : $$(`input[name="${name}"]:checked`, form).length > 0;
+    });
+    q.classList.toggle('missing', !ok);
+    if (!ok && !first) first = q;
+  });
+  if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  return !first;
+}
+document.addEventListener('change', e => {
+  const q = e.target.closest('.q.missing');
+  if (q) q.classList.remove('missing');
+});
+
+async function send(payload) {
+  if (ENDPOINT.startsWith('PASTE')) throw new Error('not-ready');
+  // text/plain 으로 보내야 미리 확인 요청(CORS preflight) 없이 앱 스크립트에 닿아요.
+  const res = await fetch(ENDPOINT, { method: 'POST', body: JSON.stringify(payload) });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'failed');
+}
+
+function show(el) {
+  el.hidden = false;
+  el.focus({ preventScroll: true });
+}
+
+// 작성 중인 후기 임시 저장 (카톡 브라우저가 닫혀도 남도록)
+const review = $('#review');
+function saveDraft() {
+  const d = {};
+  for (const [k, v] of new FormData(review)) d[k] = v;
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(d)); } catch (e) {}
+}
+try {
+  const d = JSON.parse(localStorage.getItem(DRAFT_KEY) || '{}');
+  Object.entries(d).forEach(([k, v]) => {
+    const el = review.elements[k];
+    if (!el) return;
+    if (el instanceof RadioNodeList) { const r = $(`input[name="${k}"][value="${CSS.escape(v)}"]`, review); if (r) r.checked = true; }
+    else el.value = v;
+  });
+} catch (e) {}
+review.addEventListener('input', saveDraft);
+review.addEventListener('change', saveDraft);
+
+review.addEventListener('submit', async e => {
+  e.preventDefault();
+  const status = $('.status', review);
+  if (!check(review)) { status.textContent = '표시된 질문을 골라주세요.'; return; }
+  const btn = $('button[type="submit"]', review);
+  btn.disabled = true; status.textContent = '보내는 중…';
+  const payload = { type: 'review' };
+  for (const [k, v] of new FormData(review)) payload[k] = v;
+  try {
+    await send(payload);
+    try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+    review.hidden = true;
+    $('#invite').hidden = false;
+    show($('#done'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    loadPeople();
+  } catch (err) {
+    status.textContent = err.message === 'not-ready'
+      ? '아직 설문 준비 중이에요. 잠시 뒤에 다시 시도해 주세요.'
+      : '보내지 못했어요. 인터넷 연결을 확인하고 다시 눌러주세요.';
+    btn.disabled = false;
+  }
+});
+
+// 비밀 쪽지
+const letter = $('#letter');
+let people = null;
+async function loadPeople() {
+  if (people || ENDPOINT.startsWith('PASTE')) return;
+  try {
+    const res = await fetch(ENDPOINT);
+    people = (await res.json()).participants || [];
+  } catch (e) { people = null; return; }
+  const sel = $('#me');
+  sel.innerHTML = '<option value="">골라주세요</option>';
+  people.forEach(p => sel.add(new Option(p, p)));
+  renderPicks();
+}
+function renderPicks() {
+  const me = $('#me').value;
+  const checked = new Set($$('#picks input:checked').map(i => i.value));
+  const box = $('#picks');
+  box.textContent = '';
+  (people || []).filter(p => p !== me).forEach(p => {
+    const c = chip('picks', p, 'checkbox');
+    if (checked.has(p)) c.firstChild.checked = true;
+    box.append(c);
+  });
+}
+$('#me').addEventListener('change', renderPicks);
+
+$('#open-letter').addEventListener('click', () => {
+  $('#done').hidden = true;
+  $('#invite').hidden = true;
+  show(letter);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  loadPeople();
+});
+
+letter.addEventListener('submit', async e => {
+  e.preventDefault();
+  const status = $('.status', letter);
+  if (!people) { status.textContent = '명단을 불러오는 중이에요. 잠시 뒤 다시 눌러주세요.'; loadPeople(); return; }
+  if (!check(letter)) { status.textContent = '이름과 한 분 이상을 골라주세요.'; return; }
+  const btn = $('button[type="submit"]', letter);
+  btn.disabled = true; status.textContent = '보내는 중…';
+  try {
+    await send({
+      type: 'secret',
+      me: $('#me').value,
+      picks: $$('#picks input:checked').map(i => i.value),
+      note: $('#note').value,
+    });
+    letter.hidden = true;
+    show($('#sent'));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (err) {
+    status.textContent = '보내지 못했어요. 인터넷 연결을 확인하고 다시 눌러주세요.';
+    btn.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
