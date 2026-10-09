@@ -20,31 +20,19 @@ const PARTICIPANTS = [
   // '김철수',
 ];
 
-const PLACES = ['38마일 브런치', '김유정역', '춘천 닭갈비', '산토리니'];
-
-// review.html 의 name 과 같아야 해요. [키, 시트 머리글, 허용값(없으면 자유 입력)]
+// review.html 의 name 과 같아야 해요. [키, 시트 머리글, 허용값(없으면 주관식)]
 const SCORE = ['1', '2', '3', '4', '5'];
 const REVIEW_FIELDS = [
   ['overall', '전체 만족도', SCORE],
-  ['oneLine', '한 줄 표현'],
-  ['place0', PLACES[0], SCORE],
-  ['place1', PLACES[1], SCORE],
-  ['place2', PLACES[2], SCORE],
-  ['place3', PLACES[3], SCORE],
-  ['best', '가장 좋았던 순간'],
-  ['talk', '새로운 사람과 대화', SCORE],
-  ['groups', '조 바꾸기 방식', ['좋았어요', '보통이에요', '한 조로 쭉 가는 게 나았어요']],
-  ['noProfile', '당일 실명 방식', ['좋았어요', '보통이에요', '미리 아는 게 나았어요']],
-  ['pace', '일정 시간 배분', ['빡빡했어요', '적당했어요', '여유로웠어요']],
-  ['fee', '회비 7만 원', ['적당했어요', '비쌌어요', '저렴했어요']],
-  ['again', '다음 참여', ['꼭 참여할래요', '아마도요', '글쎄요']],
-  ['wish', '아쉬운 점 · 바라는 점'],
-  ['thanks', '하고 싶은 말'],
+  ['before', '오기 전 마음'],
+  ['change', '달라진 마음'],
+  ['feel', '느낀 마음 · 기억에 남는 순간'],
+  ['next', '다음 모임을 위해'],
 ];
 const SECRET_HEADERS = ['날짜', '보낸 사람', '더 이야기 나누고 싶었던 분', '운영진에게'];
 const MAX_TEXT = 1000;
 
-/** 1) 응답 시트 두 개를 만들어요. 한 번만 실행하세요. */
+/** 1) 응답 시트 두 개를 만들어요. 처음 한 번만 실행하세요. */
 function setup() {
   if (PARTICIPANTS.length < 2) throw new Error('PARTICIPANTS 에 참가자 이름을 먼저 입력해 주세요.');
   const props = PropertiesService.getScriptProperties();
@@ -61,6 +49,16 @@ function setup() {
   Logger.log('후기 응답 시트 : ' + review.getUrl());
   Logger.log('비밀 쪽지 응답 시트 : ' + secret.getUrl());
   Logger.log('이제 배포 → 새 배포 → 웹 앱으로 배포하고, 웹 앱 URL 을 review.html 에 넣어주세요.');
+}
+
+/** 질문을 바꾼 뒤 한 번 실행 — 두 시트의 응답을 모두 지우고 머리글을 새로 써요. */
+function resetSheets() {
+  [['REVIEW_ID', ['날짜'].concat(REVIEW_FIELDS.map(f => f[1]))], ['SECRET_ID', SECRET_HEADERS]].forEach(([key, headers]) => {
+    const sheet = sheetOf(key);
+    sheet.clear();
+    sheet.appendRow(headers).setFrozenRows(1);
+  });
+  Logger.log('두 시트를 비우고 새 머리글을 썼어요. 이제 배포 → 배포 관리 → 새 버전으로 배포해 주세요.');
 }
 
 /** 페이지가 참가자 명단을 가져갈 때 */
@@ -92,6 +90,7 @@ function saveReview(d) {
       if (allowed.indexOf(v) < 0) return { ok: false, error: 'missing:' + key };
       row.push(v);
     } else {
+      if (!v.trim()) return { ok: false, error: 'missing:' + key };
       row.push(clean(v));
     }
   }
@@ -124,7 +123,6 @@ function makeReport() {
   });
   const n = rows.length;
   const col = key => rows.map(r => r[key]);
-  const choices = key => REVIEW_FIELDS.find(f => f[0] === key)[2];
   const label = key => REVIEW_FIELDS.find(f => f[0] === key)[1];
 
   const doc = DocumentApp.create('🍄 초코송이들 후기 정리본 ' + now());
@@ -134,20 +132,12 @@ function makeReport() {
   if (!n) { doc.saveAndClose(); Logger.log('아직 응답이 없어요. ' + doc.getUrl()); return; }
 
   h(body, '한눈에 보기');
-  body.appendTable([['항목', '평균 (5점 만점)']].concat(
-    ['overall', 'talk', 'place0', 'place1', 'place2', 'place3'].map(k => [label(k), avg(col(k))])
-  ));
-  const yes = col('again').filter(v => v === '꼭 참여할래요').length;
-  body.appendParagraph('다음에도 꼭 참여 : ' + yes + '명 (' + Math.round(yes / n * 100) + '%)');
+  body.appendParagraph('전체 만족도 평균 : ' + avg(col('overall')) + ' / 5');
+  dist(body, label('overall'), col('overall'), SCORE.slice().reverse());
 
-  h(body, '점수 분포');
-  ['overall', 'talk'].forEach(k => dist(body, label(k), col(k), SCORE.slice().reverse()));
-
-  h(body, '만남 · 운영');
-  ['groups', 'noProfile', 'pace', 'fee', 'again'].forEach(k => dist(body, label(k), col(k), choices(k)));
-
-  h(body, '나눠준 이야기');
-  ['oneLine', 'best', 'wish', 'thanks'].forEach(k => quotes(body, label(k), shuffle(col(k))));
+  h(body, '마음 나눔');
+  // 문항마다 순서를 섞어서, 같은 사람의 답을 줄 맞춰 이어 읽지 못하게 해요.
+  ['before', 'change', 'feel', 'next'].forEach(k => quotes(body, label(k), shuffle(col(k))));
 
   doc.saveAndClose();
   Logger.log('후기 정리본 : ' + doc.getUrl());
